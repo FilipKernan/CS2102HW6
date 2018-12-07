@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.CancellationException;
 
 class ElectionData {
     LinkedList<String> ballot = new LinkedList<String>();
@@ -33,5 +34,13 @@ class ElectionData {
                 numvotes = numvotes+1;
         }
         return numvotes;
+    }
+
+    public void addCandidate(String candidateName) throws CandidateExistsException {
+        if (ballot.contains(candidateName)) {
+            throw new CandidateExistsException();
+        } else {
+            ballot.add(candidateName);
+        }
     }
 }
