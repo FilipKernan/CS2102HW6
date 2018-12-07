@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.concurrent.CancellationException;
 
 class ElectionData {
     LinkedList<String> ballot = new LinkedList<String>();
@@ -30,18 +29,7 @@ class ElectionData {
         votes.add(candidate);
         System.out.println("You voted for " + candidate);
     }
-
-    public int countVotes(String forcand) {
-        int numvotes = 0;
-        for (String s : votes) {
-            if (s.equals(forcand))
-                numvotes = numvotes+1;
-        }
-        return numvotes;
-    }
-
-
-
+    
     public void processVote(String firstChoice, String secondChoice, String thirdChoice) {
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
@@ -60,9 +48,30 @@ class ElectionData {
 
     }
 
-    public String findWinnerMostFirstVotes(LinkedList<String> listOfVotes) {
-        for(int i = 0; i < listOfVotes.size(); i++) {
+    public String findWinnerMostFirstVotes(HashMap<Integer, LinkedList<String>> submittedVotes) {
+        HashMap<String, Integer> countedVotes = new HashMap<>();
+        for(int k = 0; k < ballot.size(); k++) {
+            countedVotes.put(ballot.get(k), 0);
+        }
+        for(LinkedList<String> votes: submittedVotes.values()) {
+            countedVotes.put(votes.getFirst(), countedVotes.get(votes.getFirst()) + 1);
+        }
 
+
+        int totalVotes = 0;
+        int max = 0;
+        String maxName = "";
+        for(String cand: countedVotes.keySet()) {
+            totalVotes += countedVotes.get(cand);
+            if(countedVotes.get(cand) > max) {
+                max = countedVotes.get(cand);
+                maxName = cand;
+            }
+        }
+        if (totalVotes / 2 < max) {
+            return maxName;
+        } else {
+            return "Runoff required";
         }
     }
 }
