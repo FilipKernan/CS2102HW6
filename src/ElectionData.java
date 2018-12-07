@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.CancellationException;
@@ -7,9 +8,12 @@ class ElectionData {
     LinkedList<String> votes = new LinkedList<String>();
     Scanner keyboard = new Scanner(System.in);
 
+    HashMap<Integer, LinkedList<String>> votersChoices;
+
     ElectionData() {
         this.ballot.add("Gompei");
         this.ballot.add("Husky");
+        votersChoices = new HashMap<>();
     }
 
     public void printBallot() {
@@ -36,12 +40,24 @@ class ElectionData {
         return numvotes;
     }
 
+
+
+    public void processVote(String firstChoice, String secondChoice, String thirdChoice) {
+        LinkedList<String> choices = new LinkedList<>();
+        choices.add(firstChoice);
+        choices.add(secondChoice);
+        choices.add(thirdChoice);
+        int key = firstChoice.length() * 3 + secondChoice.length() * 11 + thirdChoice.length() * 17;
+        votersChoices.put(key, choices);
+    }
+
     public void addCandidate(String candidateName) throws CandidateExistsException {
         if (ballot.contains(candidateName)) {
             throw new CandidateExistsException();
         } else {
             ballot.add(candidateName);
         }
+
     }
 
     public String findWinnerMostFirstVotes(LinkedList<String> listOfVotes) {
