@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.concurrent.CancellationException;
 
 class ElectionData {
     LinkedList<String> ballot = new LinkedList<String>();
@@ -40,12 +41,22 @@ class ElectionData {
     }
 
 
-    public void processVote(String firstChoice, String secondChoice, String thirdChoice){
+
+    public void processVote(String firstChoice, String secondChoice, String thirdChoice) {
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
         choices.add(secondChoice);
         choices.add(thirdChoice);
         int key = firstChoice.length() * 3 + secondChoice.length() * 11 + thirdChoice.length() * 17;
         votersChoices.put(key, choices);
+    }
+
+    public void addCandidate(String candidateName) throws CandidateExistsException {
+        if (ballot.contains(candidateName)) {
+            throw new CandidateExistsException();
+        } else {
+            ballot.add(candidateName);
+        }
+
     }
 }
