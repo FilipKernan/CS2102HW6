@@ -3,11 +3,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 class ElectionData {
-    LinkedList<String> ballot = new LinkedList<String>();
-    LinkedList<String> votes = new LinkedList<String>();
+    private LinkedList<String> ballot = new LinkedList<String>();
+    private LinkedList<String> votes = new LinkedList<String>();
     Scanner keyboard = new Scanner(System.in);
 
-    HashMap<Integer, LinkedList<String>> votersChoices;
+    private HashMap<Integer, LinkedList<String>> votersChoices;
 
     ElectionData() {
         this.ballot.add("Gompei");
@@ -29,12 +29,22 @@ class ElectionData {
         votes.add(candidate);
         System.out.println("You voted for " + candidate);
     }
-    
-    public void processVote(String firstChoice, String secondChoice, String thirdChoice) {
+public void processVote(String firstChoice, String secondChoice, String thirdChoice) throws DuplicateVotesException, UnknownCandidateException{
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
         choices.add(secondChoice);
         choices.add(thirdChoice);
+        int count = 0;
+        for (String s: choices) {
+            if (!this.ballot.contains(s)){
+                throw new UnknownCandidateException(s);
+            }
+            if (choices.contains(s)){
+                count++;
+            }
+            if (count > 1) throw new DuplicateVotesException(s);
+        }
+
         int key = firstChoice.length() * 3 + secondChoice.length() * 11 + thirdChoice.length() * 17;
         votersChoices.put(key, choices);
     }
