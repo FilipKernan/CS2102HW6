@@ -70,4 +70,10 @@ class ElectionData {
         }
 
     }
+
+    public String findWinnerMostFirstVotes(LinkedList<String> listOfVotes) {
+        for(int i = 0; i < listOfVotes.size(); i++) {
+
+        }
+    }
 }
