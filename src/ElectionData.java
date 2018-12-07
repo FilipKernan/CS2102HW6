@@ -43,4 +43,10 @@ class ElectionData {
             ballot.add(candidateName);
         }
     }
+
+    public String findWinnerMostFirstVotes(LinkedList<String> listOfVotes) {
+        for(int i = 0; i < listOfVotes.size(); i++) {
+
+        }
+    }
 }
