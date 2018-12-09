@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 class ElectionData {
     private LinkedList<String> ballot = new LinkedList<String>();
-    private LinkedList<String> votes = new LinkedList<String>();
-    private Scanner keyboard = new Scanner(System.in);
+
+
 
     private HashMap<Integer, LinkedList<String>> votersChoices;
 
@@ -15,20 +15,13 @@ class ElectionData {
         votersChoices = new HashMap<>();
     }
 
-    public void printBallot() {
-        System.out.println("The candidates are ");
-        for (String s : ballot) {
-            System.out.println(s);
-        }
+
+    public LinkedList<String> getBallot() {
+        return ballot;
     }
 
-    public void screen() {
-        this.printBallot();
-        System.out.println("Who do you want to vote for?");
-        String candidate = keyboard.next();
-        votes.add(candidate);
-        System.out.println("You voted for " + candidate);
-    }
+
+
     public void processVote(String firstChoice, String secondChoice, String thirdChoice) throws DuplicateVotesException, UnknownCandidateException{
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
