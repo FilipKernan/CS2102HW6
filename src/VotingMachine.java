@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class VotingMachine {
 
 
+
     private Scanner keyboard = new Scanner(System.in);
 
     public void printBallot(LinkedList<String> ballot) {
@@ -31,4 +32,5 @@ public class VotingMachine {
         }
         System.out.println("You voted for " + candidate);
     }
+
 }
