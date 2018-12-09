@@ -58,11 +58,7 @@ class ElectionData {
 
     }
     public void addWriteIn(String candToAdd) throws CandidateExistsException {
-        if (ballot.contains(candToAdd)) {
-            System.out.println("Candidate " + candToAdd + " is already on the ballot");
-        } else {
-            addCandidate(candToAdd);
-        }
+        addCandidate(candToAdd);
     }
 
     public String findWinnerMostFirstVotes(HashMap<Integer, LinkedList<String>> submittedVotes) {
