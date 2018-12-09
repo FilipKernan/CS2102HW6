@@ -64,7 +64,7 @@ class ElectionData {
 
     public void addCandidate(String candidateName) throws CandidateExistsException {
         if (ballot.contains(candidateName)) {
-            throw new CandidateExistsException();
+            throw new CandidateExistsException(candidateName);
         } else {
             ballot.add(candidateName);
         }
