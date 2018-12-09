@@ -29,7 +29,7 @@ class ElectionData {
         votes.add(candidate);
         System.out.println("You voted for " + candidate);
     }
-public void processVote(String firstChoice, String secondChoice, String thirdChoice) throws DuplicateVotesException, UnknownCandidateException{
+    public void processVote(String firstChoice, String secondChoice, String thirdChoice) throws DuplicateVotesException, UnknownCandidateException{
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
         choices.add(secondChoice);
@@ -83,5 +83,27 @@ public void processVote(String firstChoice, String secondChoice, String thirdCho
         } else {
             return "Runoff required";
         }
+    }
+
+    public String findWinnerMostPoints(HashMap<Integer, LinkedList<String>> submittedVotes) {
+        HashMap<String, Integer> countedVotes = new HashMap<>();
+        for(int i = 0; i < ballot.size(); i++) {
+            countedVotes.put(ballot.get(i), 0);
+        }
+        for(LinkedList<String> votes: submittedVotes.values()) {
+            countedVotes.put(votes.get(1), countedVotes.get(votes.get(1)) + 3);
+            countedVotes.put(votes.get(2), countedVotes.get(votes.get(2)) + 2);
+            countedVotes.put(votes.get(3), countedVotes.get(votes.get(3)) + 1);
+        }
+
+        int max = 0;
+        String maxName = "";
+        for(String cand: countedVotes.keySet()) {
+            if(countedVotes.get(cand) > max) {
+                max = countedVotes.get(cand);
+                maxName = cand;
+            }
+        }
+        return maxName;
     }
 }
