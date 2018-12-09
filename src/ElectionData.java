@@ -5,11 +5,11 @@ import java.util.Scanner;
 class ElectionData {
     private LinkedList<String> ballot = new LinkedList<String>();
     private LinkedList<String> votes = new LinkedList<String>();
-    Scanner keyboard = new Scanner(System.in);
+    private Scanner keyboard = new Scanner(System.in);
 
     private HashMap<Integer, LinkedList<String>> votersChoices;
 
-    ElectionData() {
+    public ElectionData() {
         this.ballot.add("Gompei");
         this.ballot.add("Husky");
         votersChoices = new HashMap<>();
