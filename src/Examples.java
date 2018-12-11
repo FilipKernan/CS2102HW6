@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 
 public class Examples {
     ElectionData ED = new ElectionData();
-    ElectionData test1 () throws CandidateExistsException {
+    ElectionData ED2 = new ElectionData();
+    @Before
+    public void test1 () throws CandidateExistsException {
 
         ED.addCandidate("Bernie Sanders");
         ED.addCandidate("Joe Biden");
@@ -23,8 +25,24 @@ public class Examples {
         } catch (UnknownCandidateException e) {
             System.out.println(e);
         }
-        return ED;
     }
+//    @Before
+//    public void test2 () throws CandidateExistsException {
+//        ED2.addCandidate("Barrack Obama");
+//        ED2.addCandidate("Patrick Eaton");
+//        ED2.addCandidate("Weird Al");
+//        ED2.addCandidate("Anyone but Trump");
+//        ED2.addCandidate("Igor");
+//        try {
+//            ED2.processVote("Weird AL", "Barrack Obama", "Igor");
+//            ED2.processVote("Weird AL", "Barrack Obama", "Patrick Eaton");
+//            ED2.processVote();
+//        } catch (DuplicateVotesException e) {
+//            System.out.println(e);
+//        } catch (UnknownCandidateException e) {
+//            System.out.println(e);
+//        }
+//    }
 
     @Test
     public void firstPastThePost() {

@@ -113,11 +113,10 @@ class ElectionData {
             countedVotes.put(ballot.get(i), 0);
         }
         for(LinkedList<String> votes: this.votersChoices.values()) {
-            countedVotes.put(votes.get(1), countedVotes.get(votes.get(1)) + 3);
-            countedVotes.put(votes.get(2), countedVotes.get(votes.get(2)) + 2);
-            countedVotes.put(votes.get(3), countedVotes.get(votes.get(3)) + 1);
+            countedVotes.put(votes.get(0), countedVotes.get(votes.get(0)) + 3);
+            countedVotes.put(votes.get(1), countedVotes.get(votes.get(1)) + 2);
+            countedVotes.put(votes.get(2), countedVotes.get(votes.get(2)) + 1);
         }
-
         int max = 0;
         String maxName = "";
         for(String cand: countedVotes.keySet()) {
@@ -126,7 +125,6 @@ class ElectionData {
                 maxName = cand;
             }
         }
-        System.out.println(countedVotes);
         return maxName;
     }
 }
