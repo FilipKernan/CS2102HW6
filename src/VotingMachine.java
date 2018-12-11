@@ -7,6 +7,10 @@ public class VotingMachine {
 
     private Scanner keyboard = new Scanner(System.in);
 
+    /**
+     * Prints the ballot
+     * @param ballot a linked list of all of the candidate
+     */
     public void printBallot(LinkedList<String> ballot) {
         System.out.println("The candidates are ");
         for (String s : ballot) {
@@ -14,6 +18,10 @@ public class VotingMachine {
         }
     }
 
+    /**
+     * prompts the user to vote
+     * @param data an empty election object
+     */
     public void screen(ElectionData data) {
         printBallot(data.getBallot());
         System.out.println("Who is your first choice?");

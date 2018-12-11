@@ -21,7 +21,14 @@ class ElectionData {
     }
 
 
-
+    /**
+     * This processes a users vote
+     * @param firstChoice
+     * @param secondChoice
+     * @param thirdChoice
+     * @throws DuplicateVotesException
+     * @throws UnknownCandidateException
+     */
     public void processVote(String firstChoice, String secondChoice, String thirdChoice) throws DuplicateVotesException, UnknownCandidateException{
         LinkedList<String> choices = new LinkedList<>();
         choices.add(firstChoice);
@@ -42,6 +49,11 @@ class ElectionData {
         votersChoices.put(key, choices);
     }
 
+    /**
+     *
+     * @param candidateName
+     * @throws CandidateExistsException
+     */
     public void addCandidate(String candidateName) throws CandidateExistsException {
         if (ballot.contains(candidateName)) {
             throw new CandidateExistsException(candidateName);
@@ -50,10 +62,21 @@ class ElectionData {
         }
 
     }
+
+    /**
+     *
+     * @param candToAdd
+     * @throws CandidateExistsException
+     */
     public void addWriteIn(String candToAdd) throws CandidateExistsException {
         addCandidate(candToAdd);
     }
 
+    /**
+     *
+     * @param submittedVotes
+     * @return
+     */
     public String findWinnerMostFirstVotes(HashMap<Integer, LinkedList<String>> submittedVotes) {
         HashMap<String, Integer> countedVotes = new HashMap<>();
         for(int k = 0; k < ballot.size(); k++) {
@@ -81,6 +104,11 @@ class ElectionData {
         }
     }
 
+    /**
+     *
+     * @param submittedVotes
+     * @return
+     */
     public String findWinnerMostPoints(HashMap<Integer, LinkedList<String>> submittedVotes) {
         HashMap<String, Integer> countedVotes = new HashMap<>();
         for(int i = 0; i < ballot.size(); i++) {
