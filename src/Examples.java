@@ -4,8 +4,9 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class Examples {
+    ElectionData ED = new ElectionData();
     ElectionData test1 () throws CandidateExistsException {
-        ElectionData ED = new ElectionData();
+
         ED.addCandidate("Bernie Sanders");
         ED.addCandidate("Joe Biden");
         ED.addCandidate("Jay Inslee");
@@ -14,10 +15,9 @@ public class Examples {
         try {
             ED.processVote("Bernie Sanders", "Joe Biden", "Eli Benevedes");
             ED.processVote("Bernie Sanders", "Joe Biden", "Filip Kernan");
-            ED.processVote("Bernie Sandesr", "Joe Biden", "Jay Inslee");
+            ED.processVote("Bernie Sanders", "Joe Biden", "Jay Inslee");
             ED.processVote("Joe Biden", "Eli Benevedes", "Jay Inslee");
             ED.processVote("Eli Benevedes", "Joe Biden", "Bernie Sanders");
-            ED.processVote("Jay Inslee", "Eli Benevedes", "Joe Biden");
         } catch (DuplicateVotesException e) {
             System.out.println(e);
         } catch (UnknownCandidateException e) {
@@ -28,6 +28,10 @@ public class Examples {
 
     @Test
     public void firstPastThePost() {
-
+        assertEquals(ED.findWinnerMostFirstVotes(), "Bernie Sanders");
+    }
+    @Test
+    public void approvalBasedVotes() {
+        assertEquals(ED.findWinnerMostPoints(), "Joe Biden");
     }
 }
