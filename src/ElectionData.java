@@ -104,7 +104,7 @@ class ElectionData {
         if (totalVotes / 2 < max) {
             return maxName;
         } else {
-            return "Runoff required";
+            return "Runoff Required";
         }
     }
 

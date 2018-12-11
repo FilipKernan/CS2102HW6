@@ -26,23 +26,27 @@ public class Examples {
             System.out.println(e);
         }
     }
-//    @Before
-//    public void test2 () throws CandidateExistsException {
-//        ED2.addCandidate("Barrack Obama");
-//        ED2.addCandidate("Patrick Eaton");
-//        ED2.addCandidate("Weird Al");
-//        ED2.addCandidate("Anyone but Trump");
-//        ED2.addCandidate("Igor");
-//        try {
-//            ED2.processVote("Weird AL", "Barrack Obama", "Igor");
-//            ED2.processVote("Weird AL", "Barrack Obama", "Patrick Eaton");
-//            ED2.processVote();
-//        } catch (DuplicateVotesException e) {
-//            System.out.println(e);
-//        } catch (UnknownCandidateException e) {
-//            System.out.println(e);
-//        }
-//    }
+    @Before
+    public void test2 () throws CandidateExistsException {
+        ED2.addCandidate("Barrack Obama");
+        ED2.addCandidate("Patrick Eaton");
+        ED2.addCandidate("Weird Al");
+        ED2.addCandidate("Anyone but Trump");
+        ED2.addCandidate("Igor");
+        try {
+            ED2.processVote("Weird Al", "Barrack Obama", "Igor");
+            ED2.processVote("Weird Al", "Barrack Obama", "Patrick Eaton");
+            ED2.processVote("Anyone but Trump", "Igor","Barrack Obama");
+            ED2.processVote("Barrack Obama", "Igor", "Anyone but Trump");
+            ED2.processVote("Anyone but Trump", "Barrack Obama", "Igor");
+            ED2.processVote("Barrack Obama", "Patrick Eaton", "Anyone but Trump");
+            ED2.processVote("Igor", "Barrack Obama", "Patrick Eaton");
+        } catch (DuplicateVotesException e) {
+            System.out.println(e);
+        } catch (UnknownCandidateException e) {
+            System.out.println(e);
+        }
+    }
 
     @Test
     public void firstPastThePost() {
@@ -51,5 +55,13 @@ public class Examples {
     @Test
     public void approvalBasedVotes() {
         assertEquals(ED.findWinnerMostPoints(), "Joe Biden");
+    }
+    @Test
+    public void firstPastThePost2() {
+        assertEquals(ED2.findWinnerMostFirstVotes(), "Runoff Required");
+}
+    @Test
+    public void approvalBasedVotes2() {
+        assertEquals(ED2.findWinnerMostPoints(), "Barrack Obama");
     }
 }
