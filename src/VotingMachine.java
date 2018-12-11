@@ -9,7 +9,7 @@ public class VotingMachine {
 
     /**
      * Prints the ballot
-     * @param ballot a linked list of all of the candidate
+     * @param ballot a linked list of all of the candidates
      */
     public void printBallot(LinkedList<String> ballot) {
         System.out.println("The candidates are ");

@@ -23,8 +23,8 @@ class ElectionData {
 
     /**
      * This processes a users vote
-     * @param firstChoice
-     * @param secondChoice
+     * @param firstChoice the voters first choice
+     * @param secondChoice the voters second choice
      * @param thirdChoice
      * @throws DuplicateVotesException
      * @throws UnknownCandidateException
@@ -34,15 +34,20 @@ class ElectionData {
         choices.add(firstChoice);
         choices.add(secondChoice);
         choices.add(thirdChoice);
-        int count = 0;
         for (String s: choices) {
+            LinkedList<String> voteClone = new LinkedList<>();
+            for (String v: choices) {
+                voteClone.add(v);
+            }
             if (!this.ballot.contains(s)){
                 throw new UnknownCandidateException(s);
             }
-            if (choices.contains(s)){
-                count++;
+
+            voteClone.remove(s);
+            if (voteClone.contains(s)){
+                throw new DuplicateVotesException(s);
             }
-            if (count > 1) throw new DuplicateVotesException(s);
+
         }
 
         int key = firstChoice.length() * 3 + secondChoice.length() * 11 + thirdChoice.length() * 17;
@@ -50,8 +55,8 @@ class ElectionData {
     }
 
     /**
-     *
-     * @param candidateName
+     * adds a candidate to the election
+     * @param candidateName the name of the candidate
      * @throws CandidateExistsException
      */
     public void addCandidate(String candidateName) throws CandidateExistsException {
@@ -64,8 +69,8 @@ class ElectionData {
     }
 
     /**
-     *
-     * @param candToAdd
+     * adds a write in candidate
+     * @param candToAdd the candidate that is being passed in
      * @throws CandidateExistsException
      */
     public void addWriteIn(String candToAdd) throws CandidateExistsException {
@@ -73,7 +78,7 @@ class ElectionData {
     }
 
     /**
-     *
+     * Finds the winner of the election by first choice
      * @param submittedVotes
      * @return
      */
@@ -105,7 +110,7 @@ class ElectionData {
     }
 
     /**
-     *
+     * finds the winner of the election by points
      * @param submittedVotes
      * @return
      */
