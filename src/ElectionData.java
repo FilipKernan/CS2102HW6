@@ -10,8 +10,6 @@ class ElectionData {
     private HashMap<Integer, LinkedList<String>> votersChoices;
 
     public ElectionData() {
-        this.ballot.add("Gompei");
-        this.ballot.add("Husky");
         votersChoices = new HashMap<>();
     }
 
@@ -79,15 +77,14 @@ class ElectionData {
 
     /**
      * Finds the winner of the election by first choice
-     * @param submittedVotes
      * @return
      */
-    public String findWinnerMostFirstVotes(HashMap<Integer, LinkedList<String>> submittedVotes) {
+    public String findWinnerMostFirstVotes() {
         HashMap<String, Integer> countedVotes = new HashMap<>();
         for(int k = 0; k < ballot.size(); k++) {
             countedVotes.put(ballot.get(k), 0);
         }
-        for(LinkedList<String> votes: submittedVotes.values()) {
+        for(LinkedList<String> votes: this.votersChoices.values()) {
             countedVotes.put(votes.getFirst(), countedVotes.get(votes.getFirst()) + 1);
         }
 
@@ -102,6 +99,8 @@ class ElectionData {
                 maxName = cand;
             }
         }
+        System.out.println(countedVotes);
+
         if (totalVotes / 2 < max) {
             return maxName;
         } else {
@@ -111,20 +110,18 @@ class ElectionData {
 
     /**
      * finds the winner of the election by points
-     * @param submittedVotes
      * @return
      */
-    public String findWinnerMostPoints(HashMap<Integer, LinkedList<String>> submittedVotes) {
+    public String findWinnerMostPoints() {
         HashMap<String, Integer> countedVotes = new HashMap<>();
         for(int i = 0; i < ballot.size(); i++) {
             countedVotes.put(ballot.get(i), 0);
         }
-        for(LinkedList<String> votes: submittedVotes.values()) {
-            countedVotes.put(votes.get(1), countedVotes.get(votes.get(1)) + 3);
-            countedVotes.put(votes.get(2), countedVotes.get(votes.get(2)) + 2);
-            countedVotes.put(votes.get(3), countedVotes.get(votes.get(3)) + 1);
+        for(LinkedList<String> votes: this.votersChoices.values()) {
+            countedVotes.put(votes.get(0), countedVotes.get(votes.get(0)) + 3);
+            countedVotes.put(votes.get(1), countedVotes.get(votes.get(1)) + 2);
+            countedVotes.put(votes.get(2), countedVotes.get(votes.get(2)) + 1);
         }
-
         int max = 0;
         String maxName = "";
         for(String cand: countedVotes.keySet()) {
